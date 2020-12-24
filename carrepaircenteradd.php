@@ -31,7 +31,7 @@ END;
 }
 echo <<<END
   </ul></footer>
-  <div class="order"><form action="add_carstop.php" method="POST">
+  <div class="order"><form action="add_carrepair.php" method="POST">
     Адрес:<input type="text" name="adress"><br>
     Кол-во мест:<input type="text" name="num"><br>
     <input type="submit" value="Добавить">

@@ -8,17 +8,22 @@
     printf("Соединение не удалось: %s\n", $link->connect_error);
     exit();
   }
-  $query = "SELECT FreeSpace FROM carstop WHERE ID = '{$_POST['ID']}'";
+
+  $query = "SELECT FreeSpace FROM carrepair WHERE id = '{$_GET['id']}'";
   $result = $link->query($query);
   $data = $result->fetch_assoc();
-  if(--$data['FreeSpace'] >= 0){
-    $query = "UPDATE carstop SET FreeSpace = '{$data['FreeSpace']}' WHERE ID = '{$_POST['ID']}'";
+  $data['FreeSpace']--;
+
+  if($data['FreeSpace'] >= 0){
+    $query = "UPDATE carrepair SET FreeSpace = '{$data['FreeSpace']}' WHERE id = '{$_GET['id']}'";
     $result = $link->query($query);
   }
   else{
     header("Location: car.php"); exit();
   }
-  $query = "INSERT INTO cars (Mark, Number, CarStop) VALUES ('{$_POST['mark']}', '{$_POST['num']}', '{$_POST['ID']}')";
+
+  $query = "UPDATE cars SET Will = '{$_GET['id']}' WHERE Number = '{$_GET['num']}'";
   $result = $link->query($query);
+
   header("Location: car.php"); exit();
 ?>

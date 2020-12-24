@@ -1,6 +1,5 @@
 <?php
 session_start();
-
 echo <<<END
 <!DOCTYPE html>
 <html>
@@ -34,53 +33,51 @@ END;
     <li><a href="carrepaircenter.php">Автосалоны</a></li>
 END;
       break;
-    case 1:
-      echo <<<END
-    <li><a href="call.php">Вызовы</a></li>
-END;
-      break;
-    case 2:
-      echo <<<END
-    <li><a href="call.php">Вызовы</a></li>
-    <li><a href="car.php">Машины</a></li>
-END;
-      break;
     case 3:
     echo <<<END
-    <li><a href="car.php">Машины</a></li>
+      <li><a href="car.php">Машины</a></li>
     <li><a href="carstop.php">Автостоянки</a></li>
     <li><a href="carrepaircenter.php">Автосалоны</a></li>
 END;
-      break;
-    case 4:
-    echo <<<END
-    <li><a href="worker.php">Сотрудники</a></li>
-END;
-      break;
 }
 echo <<<END
   </ul></footer>
-  <div class="login">Добро пожаловать в систему,
+  <table><tr>
+  <td>ID</td><td>Адресс</td><td>Кол-во мест</td><td>Cвободных мест</td>
+  </tr>
 END;
-switch ($_SESSION['JID']) {
-  case 0:
-    echo "администратор.";
-    break;
-  case 1:
-    echo "диспетчер.";
-    break;
-  case 0:
-    echo "водитель.";
-    break;
-  case 0:
-    echo "механик.";
-    break;
-  case 0:
-    echo "наёмщик.";
-    break;
-}
+
+  require "hlpb.php";
+
+  $link = new mysqli($host, $login, $pass, $bd);
+  if ($link->connect_errno) {
+    printf("Соединение не удалось: %s\n", $link->connect_error);
+    exit();
+  }
+  $query = "SELECT id, Addres, AllSpace, FreeSpace FROM carrepair";
+  if($result = $link->query($query)){
+    while($data = $result->fetch_assoc()){
+      echo <<<END
+      <tr>
+      <td>{$data['id']}</td><td>{$data['Addres']}</td><td>{$data['AllSpace']}</td><td>{$data['FreeSpace']}</td>
+END;
+      if($_SESSION['JID'] != 3)
+      echo <<<END
+    <td><a href = 'carrepairdelete.php?ID={$data['id']}'>Удалить автосалон</a></td>
+END;
+      echo <<<END
+      </tr>
+END;
+    }
+    $result->free();
+  }
+  $link->close();
 echo <<<END
-</div>
+  </table>
+END;
+if($_SESSION['JID'] != 3)
+  echo "<a href = 'carrepaircenteradd.php'>Добавить автосалон</a>";
+echo <<<END
 </body>
 </html>
 END;

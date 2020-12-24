@@ -30,12 +30,14 @@ END;
     <li><a href="car.php">Машины</a></li>
     <li><a href="worker.php">Сотрудники</a></li>
     <li><a href="carstop.php">Автостоянки</a></li>
+    <li><a href="carrepaircenter.php">Автосалоны</a></li>
 END;
       break;
     case 3:
     echo <<<END
       <li><a href="car.php">Машины</a></li>
     <li><a href="carstop.php">Автостоянки</a></li>
+    <li><a href="carrepaircenter.php">Автосалоны</a></li>
 END;
 }
 echo <<<END
@@ -57,11 +59,11 @@ END;
     while($data = $result->fetch_assoc()){
       echo <<<END
       <tr>
-      <td>{$data['ID']}</td><td>{$data['Addres']}</td><td>{$data['AllSpace']}</td>
+      <td>{$data['ID']}</td><td>{$data['Addres']}</td><td>{$data['AllSpace']}</td><td>{$data['FreeSpace']}</td>
 END;
       if($_SESSION['JID'] != 3)
       echo <<<END
-      <td>{$data['FreeSpace']}</td><td><a href = 'carstopdelete.php?ID={$data['ID']}'>Удалить автостоянку</a></td>
+    <td><a href = 'carstopdelete.php?ID={$data['ID']}'>Удалить автостоянку</a></td>
 END;
       echo <<<END
       </tr>

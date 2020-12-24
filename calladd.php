@@ -18,17 +18,13 @@ END;
     <li><a href="call.php">Вызовы</a></li>
     <li><a href="car.php">Машины</a></li>
     <li><a href="worker.php">Сотрудники</a></li>
+    <li><a href="carstop.php">Автостоянки</a></li>
+    <li><a href="carrepaircenter.php">Автосалоны</a></li>
 END;
       break;
     case 1:
       echo <<<END
     <li><a href="call.php">Вызовы</a></li>
-END;
-      break;
-    case 2:
-      echo <<<END
-    <li><a href="call.php">Вызовы</a></li>
-    <li><a href="car.php">Машины</a></li>
 END;
       break;
 }
@@ -38,7 +34,7 @@ echo <<<END
     Откуда:<input type="text" name="from"><br>
     Куда:<input type="text" name="where"><br>
     Телефон:<input type="text" name="phone"><br>
-    <input type="submit" value="Заказать">
+    <input type="submit" value="Добавить">
     <input type="hidden" name="R" value="1">
   </form></div>
 </html>

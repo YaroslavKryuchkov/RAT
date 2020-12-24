@@ -30,6 +30,7 @@ END;
     <li><a href="car.php">Машины</a></li>
     <li><a href="worker.php">Сотрудники</a></li>
     <li><a href="carstop.php">Автостоянки</a></li>
+    <li><a href="carrepaircenter.php">Автосалоны</a></li>
 END;
       break;
     case 2:
@@ -42,6 +43,7 @@ END;
     echo <<<END
     <li><a href="car.php">Машины</a></li>
     <li><a href="carstop.php">Автостоянки</a></li>
+    <li><a href="carrepaircenter.php">Автосалоны</a></li>
 END;
 }
 echo <<<END
@@ -70,7 +72,7 @@ END;
     }
     while($data = $result->fetch_assoc()){
       if($data['Stealed'] != 0 && $_SESSION['JID'] == 2) continue;
-      if($data['Will'] != 1 && $_SESSION['JID'] == 2) continue;
+      if($data['Will'] != 0  && $_SESSION['JID'] == 2) continue;
       $query2 = "SELECT Addres FROM carstop WHERE ID = {$data['CarStop']}";
       $result2 = $link->query($query2);
       $data2 = $result2->fetch_assoc();
@@ -80,12 +82,12 @@ END;
 END;
       switch ($_SESSION['JID']) {
         case 0:
-        if($data['Will'] != 0)
+        if($data['Will'] == 0)
         if($S == "0" && $data['Steled'] == 0) echo "<td><a href = 'carsteal.php?num={$data['Number']}'>Взять машину</a></td>";
         elseif($S == "1" && strcmp($data['Stealed'] ,$_SESSION['Num']) != 0) echo "<td>Вы уже взяли другую машину машину</td>";
         elseif($S == "0" && $data['Steled'] != 0) echo "<td>Кто-то другой взял эту машину</td>";
         elseif(strcmp($data['Stealed'] ,$_SESSION['Num']) == 0) echo "<td><a href = 'carreturn.php?num={$data['Number']}'>Вернуть машину</a></td>";
-        if($data['Will'] == 1) echo "<td><a href = 'carrepair.php?num={$data['Number']}'>В ремонт машину</a></td>";
+        if($data['Will'] == 0) echo "<td><a href = 'carrepair.php?num={$data['Number']}'>В ремонт машину</a></td>";
         else echo "<td><a href = 'cargive.php?num={$data['Number']}'>Вернуть машину</a></td>";
         echo "<td><a href = 'cardelete.php?num={$data['Number']}'>Выкинуть машину</a></td>";
           break;
@@ -96,7 +98,7 @@ END;
         case 3:
         if($data["Stealed"] == "0") echo "<td>Машина на стоянке</td>";
         else echo "<td><a href = 'carreturn.php?num={$data['Number']}'>Вернуть машину</a></td>";
-        if($data['Will'] == 1) echo "<td><a href = 'carrepair.php?num={$data['Number']}'>В ремонт машину</a></td>";
+        if($data['Will'] == 0) echo "<td><a href = 'carrepair.php?num={$data['Number']}'>В ремонт машину</a></td>";
         else echo "<td><a href = 'cargive.php?num={$data['Number']}'>Вернуть машину</a></td>";
         echo "<td><a href = 'cardelete.php?num={$data['Number']}'>Выкинуть машину</a></td>";
           break;

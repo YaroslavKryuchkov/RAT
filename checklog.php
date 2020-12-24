@@ -27,4 +27,6 @@
     $_SESSION["Num"] = strval($data['PhoneNum']);
     header("Location: workstation.php"); exit();
   }
+
+  header("Location: index.php"); exit();
 ?>

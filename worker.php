@@ -30,6 +30,7 @@ END;
     <li><a href="car.php">Машины</a></li>
     <li><a href="worker.php">Сотрудники</a></li>
     <li><a href="carstop.php">Автостоянки</a></li>
+    <li><a href="carrepaircenter.php">Автосалоны</a></li>
 END;
       break;
     case 4:
