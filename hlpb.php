@@ -6,9 +6,9 @@
   $bd = 'f0497701_taxipark';
   */
   #/*
-  $host = 'localhost';
-  $login = 'admin';
-  $pass = 'pass';
-  $bd = 'taxipark';
+  $host = 'remotemysql.com';
+  $login = 'ZM7I8vD732';
+  $pass = '956iGxSDNw';
+  $bd = 'ZM7I8vD732';
   #*/
 ?>
