@@ -69,13 +69,13 @@ switch ($_SESSION['JID']) {
   case 1:
     echo "диспетчер.";
     break;
-  case 0:
+  case 2:
     echo "водитель.";
     break;
-  case 0:
+  case 3:
     echo "механик.";
     break;
-  case 0:
+  case 4:
     echo "наёмщик.";
     break;
 }
