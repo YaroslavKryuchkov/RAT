@@ -92,8 +92,10 @@ END;
         echo "<td><a href = 'cardelete.php?num={$data['Number']}'>Выкинуть машину</a></td>";
           break;
         case 2:
-        if($S == "0") echo "<td><a href = 'carsteal.php?num={$data['Number']}'>Взять машину</a></td>";
-        else echo "Вы уже взяли машинну.";
+        if($S == "0" && $data['Steled'] == 0) echo "<td><a href = 'carsteal.php?num={$data['Number']}'>Взять машину</a></td>";
+        elseif($S == "1" && strcmp($data['Stealed'] ,$_SESSION['Num']) != 0) echo "<td>Вы уже взяли другую машину машину</td>";
+        elseif($S == "0" && $data['Steled'] != 0) echo "<td>Кто-то другой взял эту машину</td>";
+        elseif(strcmp($data['Stealed'] ,$_SESSION['Num']) == 0) echo "<td>Вы взяли эту машину</td>";
           break;
         case 3:
         if($data["Stealed"] == "0") echo "<td>Машина на стоянке</td>";
